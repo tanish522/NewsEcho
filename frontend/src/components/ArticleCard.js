@@ -8,21 +8,31 @@ import {
     Button,
     Typography,
 } from "@mui/material";
+import classNames from "classnames";
+import useStyles from "./articleCardStyles";
 
 const ArticleCard = ({
     article: { description, publishedAt, title, url, urlToImage, source },
     i,
+    activeArticle,
 }) => {
+    const classes = useStyles();
     return (
-        <Card>
-            <CardActionArea>
+        <Card
+            className={classNames(
+                classes.card,
+                activeArticle === i ? classes.activeCard : null
+            )}
+        >
+            <CardActionArea href={url} target="_blank">
                 <CardMedia
+                    className={classes.media}
                     image={
                         urlToImage ||
-                        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DP5A96VtNaP8&psig=AOvVaw2fPGjhDX92IkDxKceWWqIm&ust=1691848825595000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOD8iZTi1IADFQAAAAAdAAAAABAW"
+                        "https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png"
                     }
                 ></CardMedia>
-                <div>
+                <div className={classes.details}>
                     <Typography
                         variant="body2"
                         color="textSecondary"
@@ -40,7 +50,7 @@ const ArticleCard = ({
                     </Typography>
                 </div>
 
-                <Typography gutterBottom variant="h5">
+                <Typography className={classes.title} gutterBottom variant="h5">
                     {title}
                 </Typography>
                 <CardContent>
@@ -53,7 +63,7 @@ const ArticleCard = ({
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary">
                     Learn More
                 </Button>
