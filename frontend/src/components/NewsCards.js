@@ -51,6 +51,7 @@ const NewsCards = ({ articles, activeArticle }) => {
                             md={4}
                             lg={3}
                             className={classes.infoCard}
+                            key={infoCard.title}
                         >
                             <div
                                 className={classes.card}
